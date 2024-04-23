@@ -35,7 +35,7 @@ services:
       - --certificatesresolvers.le.acme.httpchallenge.entrypoint=http
       - --certificatesresolvers.le.acme.email=${LETS_ENCRYPT_CONTACT_EMAIL}
       - --certificatesresolvers.le.acme.storage=/opt/traefik/acme.json
-#      - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
     volumes:
       - ${BASE_DIR_PROD}${PROJECT_PATH}/sources/cl-monaco/compose/dynamic.yml:/dynamic.yml
       - /var/run/docker.sock:/var/run/docker.sock:ro
