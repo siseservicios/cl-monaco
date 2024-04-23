@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - --entrypoints.web.address=:80
+      - --providers.docker=true
+      - --api.insecure=true # Don't do that in production
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  postgres:
+    image: ${POSTGRES_IMAGE}
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - ${PROJECT_PATH_PROD}/postgresql:/var/lib/postgresql/data
+
+  odoo_prod:
+    image: ${ODOO_IMAGE}
+    container_name: odoo_prod
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.odoo_prod.rule=Host(${ODOO_PROD_DOMAIN})
+      - traefik.http.routers.odoo_prod.entrypoints=web
+      - traefik.http.middlewares.compress.compress=true # Middleware para comprimir paginas.
+    volumes:
+      - ${PROJECT_PATH_PROD}/config:/opt/odoo/etc/
+      - ${PROJECT_PATH_PROD}/data_dir:/opt/odoo/data
+      - ${PROJECT_PATH_PROD}/log:/var/log/odoo
+      - ${PROJECT_PATH_PROD}/sources:/opt/odoo/custom-addons
+      - ${PROJECT_PATH_PROD}/backup_dir:/var/odoo/backups/
+    links:
+      - postgres:db
+
+  odoo_test:
+    image: ${ODOO_IMAGE}
+    container_name: odoo_test
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.odoo_test.rule=Host(${ODOO_TEST_DOMAIN})
+      - traefik.http.routers.odoo_test.entrypoints=web
+      - traefik.http.middlewares.compress.compress=true # Middleware para comprimir paginas.
+    volumes:
+      - ${PROJECT_PATH_TEST}/config:/opt/odoo/etc/
+      - ${PROJECT_PATH_TEST}/data_dir:/opt/odoo/data
+      - ${PROJECT_PATH_TEST}/log:/var/log/odoo
+      - ${PROJECT_PATH_TEST}/sources:/opt/odoo/custom-addons
+      - ${PROJECT_PATH_TEST}/backup_dir:/var/odoo/backups/
+    links:
+      - postgres:db
