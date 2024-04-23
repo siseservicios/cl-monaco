@@ -44,7 +44,7 @@
     "port": "8069",
     "git-repos": [
         "git@github.com:siseservicios/cl-monaco.git",
-        #"http://github.com/siseservicios/reves.git -b main",
+        #"http://github.com/siseservicios/monaco.git -b main",
 
         "https://github.com/ingadhoc/account-financial-tools.git",
         "https://github.com/ingadhoc/account-payment.git",
