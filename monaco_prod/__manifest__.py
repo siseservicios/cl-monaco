@@ -46,6 +46,7 @@
         "git@github.com:siseservicios/cl-monaco.git",
         #"http://github.com/siseservicios/monaco.git -b main",
 
+        # adhoc
         "https://github.com/ingadhoc/account-financial-tools.git",
         "https://github.com/ingadhoc/account-payment.git",
         "https://github.com/ingadhoc/odoo-argentina.git",
@@ -58,6 +59,7 @@
         'https://github.com/OCA/reporting-engine.git',
         'https://github.com/OCA/stock-logistics-workflow.git',
         'https://github.com/OCA/web.git',
+        'https://github.com/OCA/sale-workflow.git oca-sale-workflow',
 
     ],
     # list of images to use in the form 'name image-url'
