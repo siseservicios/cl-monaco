@@ -143,74 +143,74 @@ services:
       - traefik.http.middlewares.limit.buffering.memRequestBodyBytes=40971520
       - traefik.http.middlewares.limit.buffering.maxRequestBodyBytes=40971520
 
-  odoo_staging:
-    image: ${ODOO_IMAGE}
-    container_name: odoo_staging
-    # networks:
-    #   - web
-    links:
-      - postgres:db
-    depends_on:
-      - postgres
-      - traefik
-    command:
-      - --db-filter=monaco_test
-    volumes:
-      - ${BASE_DIR_STAGING}${PROJECT_PATH}/config:/opt/odoo/etc/
-      - ${BASE_DIR_STAGING}${PROJECT_PATH}/data_dir:/opt/odoo/data
-      - ${BASE_DIR_STAGING}${PROJECT_PATH}/log:/var/log/odoo
-      - ${BASE_DIR_STAGING}${PROJECT_PATH}/sources:/opt/odoo/custom-addons
-      - ${BASE_DIR_STAGING}${PROJECT_PATH}/backup_dir:/var/odoo/backups/
-    labels:
-      - traefik.enable=true
-      #----------------------------------------------- routers for: odoo --------------------------------------------------
-      # http
-      - traefik.http.routers.odoo-http1.rule=Host(`test.${ODOO_HOSTNAME}`)
-      - traefik.http.routers.odoo-http1.entrypoints=http
-      - traefik.http.routers.odoo-http1.middlewares=redirect@file
-      - traefik.http.routers.odoo-http1.service=odoo_staging
-      # https
-      - traefik.http.routers.odoo-https1.rule=Host(`test.${ODOO_HOSTNAME}`)
-      - traefik.http.routers.odoo-https1.entrypoints=https
-      - traefik.http.routers.odoo-https1.service=odoo_staging
-      - traefik.http.routers.odoo-https1.tls.certresolver=le
-      - traefik.http.routers.odoo-https1.middlewares=gzip,sslheader,limit
+#   odoo_staging:
+#     image: ${ODOO_IMAGE}
+#     container_name: odoo_staging
+#     # networks:
+#     #   - web
+#     links:
+#       - postgres:db
+#     depends_on:
+#       - postgres
+#       - traefik
+#     command:
+#       - --db-filter=monaco_test
+#     volumes:
+#       - ${BASE_DIR_STAGING}${PROJECT_PATH}/config:/opt/odoo/etc/
+#       - ${BASE_DIR_STAGING}${PROJECT_PATH}/data_dir:/opt/odoo/data
+#       - ${BASE_DIR_STAGING}${PROJECT_PATH}/log:/var/log/odoo
+#       - ${BASE_DIR_STAGING}${PROJECT_PATH}/sources:/opt/odoo/custom-addons
+#       - ${BASE_DIR_STAGING}${PROJECT_PATH}/backup_dir:/var/odoo/backups/
+#     labels:
+#       - traefik.enable=true
+#       #----------------------------------------------- routers for: odoo --------------------------------------------------
+#       # http
+#       - traefik.http.routers.odoo-http1.rule=Host(`test.${ODOO_HOSTNAME}`)
+#       - traefik.http.routers.odoo-http1.entrypoints=http
+#       - traefik.http.routers.odoo-http1.middlewares=redirect@file
+#       - traefik.http.routers.odoo-http1.service=odoo_staging
+#       # https
+#       - traefik.http.routers.odoo-https1.rule=Host(`test.${ODOO_HOSTNAME}`)
+#       - traefik.http.routers.odoo-https1.entrypoints=https
+#       - traefik.http.routers.odoo-https1.service=odoo_staging
+#       - traefik.http.routers.odoo-https1.tls.certresolver=le
+#       - traefik.http.routers.odoo-https1.middlewares=gzip,sslheader,limit
 
-      #----------------------------- routes for: odoo/web/database || odoo/website/info  -----------------------------
-      # http
-      - traefik.http.routers.odoo-db-http1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/web/database`) || PathPrefix(`/website/info`))
-      - traefik.http.routers.odoo-db-http1.entrypoints=http
-      - traefik.http.routers.odoo-db-http1.service=odoo_staging
-      - traefik.http.routers.odoo-db-http1.middlewares=redirect@file
-      - traefik.http.services.odoo-db-http1.loadbalancer.server.port=8069
-      # https
-      - traefik.http.routers.odoo-db-https1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/web/database`) || PathPrefix(`/website/info`))
-      - traefik.http.routers.odoo-db-https1.entrypoints=https
-      - traefik.http.routers.odoo-db-https1.service=odoo_staging
-      - traefik.http.routers.odoo-db-https1.tls.certresolver=le
-      - traefik.http.routers.odoo-db-https1.middlewares=gzip,sslheader,limit
-      - traefik.http.services.odoo-db-https1.loadbalancer.server.port=8069
+#       #----------------------------- routes for: odoo/web/database || odoo/website/info  -----------------------------
+#       # http
+#       - traefik.http.routers.odoo-db-http1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/web/database`) || PathPrefix(`/website/info`))
+#       - traefik.http.routers.odoo-db-http1.entrypoints=http
+#       - traefik.http.routers.odoo-db-http1.service=odoo_staging
+#       - traefik.http.routers.odoo-db-http1.middlewares=redirect@file
+#       - traefik.http.services.odoo-db-http1.loadbalancer.server.port=8069
+#       # https
+#       - traefik.http.routers.odoo-db-https1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/web/database`) || PathPrefix(`/website/info`))
+#       - traefik.http.routers.odoo-db-https1.entrypoints=https
+#       - traefik.http.routers.odoo-db-https1.service=odoo_staging
+#       - traefik.http.routers.odoo-db-https1.tls.certresolver=le
+#       - traefik.http.routers.odoo-db-https1.middlewares=gzip,sslheader,limit
+#       - traefik.http.services.odoo-db-https1.loadbalancer.server.port=8069
 
-      #---------------------------------------- routes for: odoo/longpolling ------------------------------------------------
-      # http
-      - traefik.http.routers.odoo-im-http1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/longpolling`))
-      - traefik.http.routers.odoo-im-http1.entrypoints=http
-      - traefik.http.routers.odoo-im-http1.middlewares=redirect@file
-      - traefik.http.routers.odoo-im-http1.service=odoo-im1
-      # https
-      - traefik.http.routers.odoo-im-https1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/longpolling`))
-      - traefik.http.routers.odoo-im-https1.entrypoints=https
-      - traefik.http.routers.odoo-im-https1.service=odoo-im1
-      - traefik.http.routers.odoo-im-https1.tls.certresolver=le
-#      - traefik.http.routers.odoo-im-https1.middlewares=gzip,sslheader,limit
+#       #---------------------------------------- routes for: odoo/longpolling ------------------------------------------------
+#       # http
+#       - traefik.http.routers.odoo-im-http1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/longpolling`))
+#       - traefik.http.routers.odoo-im-http1.entrypoints=http
+#       - traefik.http.routers.odoo-im-http1.middlewares=redirect@file
+#       - traefik.http.routers.odoo-im-http1.service=odoo-im1
+#       # https
+#       - traefik.http.routers.odoo-im-https1.rule=Host(`test.${ODOO_HOSTNAME}`) && (PathPrefix(`/longpolling`))
+#       - traefik.http.routers.odoo-im-https1.entrypoints=https
+#       - traefik.http.routers.odoo-im-https1.service=odoo-im1
+#       - traefik.http.routers.odoo-im-https1.tls.certresolver=le
+# #      - traefik.http.routers.odoo-im-https1.middlewares=gzip,sslheader,limit
 
-      #====================================================== services ===========================================================
-      - traefik.http.services.odoo_staging.loadbalancer.server.port=8069
-#      - traefik.http.services.odoo-im-https1.loadbalancer.server.port=8072
-      - traefik.http.services.odoo-im1.loadbalancer.server.port=8072
+#       #====================================================== services ===========================================================
+#       - traefik.http.services.odoo_staging.loadbalancer.server.port=8069
+# #      - traefik.http.services.odoo-im-https1.loadbalancer.server.port=8072
+#       - traefik.http.services.odoo-im1.loadbalancer.server.port=8072
 
-      #===================================================== middlewares =========================================================
-      - traefik.http.middlewares.gzip.compress=true
-      - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-      - traefik.http.middlewares.limit.buffering.memRequestBodyBytes=40971520
-      - traefik.http.middlewares.limit.buffering.maxRequestBodyBytes=40971520
+#       #===================================================== middlewares =========================================================
+#       - traefik.http.middlewares.gzip.compress=true
+#       - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
+#       - traefik.http.middlewares.limit.buffering.memRequestBodyBytes=40971520
+#       - traefik.http.middlewares.limit.buffering.maxRequestBodyBytes=40971520
