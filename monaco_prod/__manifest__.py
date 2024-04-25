@@ -60,6 +60,7 @@
         'https://github.com/OCA/stock-logistics-workflow.git',
         'https://github.com/OCA/web.git',
         'https://github.com/OCA/sale-workflow.git oca-sale-workflow',
+        'https://github.com/OCA/OpenUpgrade.git oca-openupgrade',
 
     ],
     # list of images to use in the form 'name image-url'
