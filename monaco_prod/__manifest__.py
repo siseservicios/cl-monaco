@@ -49,19 +49,21 @@
         # adhoc
         'https://github.com/ingadhoc/account-financial-tools.git adhoc-account-financial-tools',
         'https://github.com/ingadhoc/account-payment.git adhoc-account-payment',
-        'https://github.com/ingadhoc/odoo-argentina.git adhoc-odoo-argentina',
         'https://github.com/ingadhoc/argentina-sale.git adhoc-argentina-sale',
         'https://github.com/ingadhoc/account-invoicing.git adhoc-account-invoicing',
+        'https://github.com/ingadhoc/odoo-argentina.git adhoc-odoo-argentina',
         'https://github.com/ingadhoc/odoo-argentina-ce.git adhoc-odoo-argentina-ce',
+        'https://github.com/ingadhoc/partner.git adhoc-partner',
         'https://github.com/ingadhoc/product.git adhoc-product',
         'https://github.com/ingadhoc/stock.git adhoc-stock',
 
         # oca
+        'https://github.com/OCA/OpenUpgrade oca-openupgrade',
+        'https://github.com/OCA/partner-contact.git oca-partner-contact',
         'https://github.com/OCA/reporting-engine.git oca-reporting-engine',
+        'https://github.com/OCA/stock-logistics-availability oca-stock-logistics-availability',
         'https://github.com/OCA/stock-logistics-workflow.git oca-stock-logistics-workflow',
         'https://github.com/OCA/web.git oca-web',
-        'https://github.com/OCA/OpenUpgrade oca-openupgrade',
-        'https://github.com/OCA/stock-logistics-availability oca-stock-logistics-availability',
 
     ],
     # list of images to use in the form 'name image-url'
