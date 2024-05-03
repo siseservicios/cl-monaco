@@ -61,6 +61,7 @@
         'https://github.com/OCA/OpenUpgrade oca-openupgrade',
         'https://github.com/OCA/partner-contact.git oca-partner-contact',
         'https://github.com/OCA/reporting-engine.git oca-reporting-engine',
+        'https://github.com/OCA/sale-workflow.git oca-sale-workflow',
         'https://github.com/OCA/stock-logistics-availability oca-stock-logistics-availability',
         'https://github.com/OCA/stock-logistics-workflow.git oca-stock-logistics-workflow',
         'https://github.com/OCA/web.git oca-web',
