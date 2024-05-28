@@ -60,6 +60,7 @@
         # oca
         'https://github.com/OCA/OpenUpgrade oca-openupgrade',
         'https://github.com/OCA/partner-contact.git oca-partner-contact',
+        'https://github.com/OCA/product-attribute.git oca-product-attribute',
         'https://github.com/OCA/reporting-engine.git oca-reporting-engine',
         'https://github.com/OCA/sale-workflow.git oca-sale-workflow',
         'https://github.com/OCA/stock-logistics-availability oca-stock-logistics-availability',
