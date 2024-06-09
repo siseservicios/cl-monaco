@@ -11,5 +11,5 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-sudo cp -ar /odoo_ar/odoo-16.0/$project/data_dir/filestore/$1/ /odoo_st/odoo-16.0/$project/data_dir/filestore/
+sudo cp -ar /odoo_ar/odoo-16.0/$project/data_dir/filestore/$1 /odoo_st/odoo-16.0/$project/data_dir/filestore/
 sudo rm -r /odoo_ar/odoo-16.0/$project/data_dir/filestore/$1
