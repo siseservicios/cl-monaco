@@ -4,8 +4,6 @@
 # Antes de esto hay que correr sudo docker network create web
 #################################################################################
 
-version: "3.8"
-
 # networks:
 #   web:
 #     external: true
