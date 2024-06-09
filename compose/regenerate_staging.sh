@@ -26,4 +26,4 @@ git -C $BASE_ST/sources/monaco checkout staging
 # --------------------------------------------------------------------------------------
 
 # Activar el database manager en test
-sed -i 's/list_db = True/list_db = False/' $BASE_ST/config/odoo.conf
+sed -i 's/list_db = False/list_db = True/' $BASE_ST/config/odoo.conf
