@@ -1,2 +1,2 @@
-# cl-reves
-proyecto ramos revestimientos para odoo v16 CE
+# cl-monaco
+proyecto para monaco V16.0
