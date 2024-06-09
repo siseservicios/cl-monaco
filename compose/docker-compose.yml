@@ -1,7 +1,6 @@
 # Compose file odoo Monaco v16.0 + https
 # Version 2024-05-03
 # Basado en https://github.com/wbsouza/traefik-odoo
-# Antes de esto hay que correr sudo docker network create web
 #################################################################################
 
 # networks:
