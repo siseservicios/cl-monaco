@@ -14,14 +14,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
+#      - "8080:8080"
     command:
       - --providers.docker=true
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
 
-      - --api.insecure=true   # No hacer esto en produccion
-      - --api.dashboard=true  # Esto habilita el dashboard ?
+#      - --api.insecure=true   # No hacer esto en produccion
+#      - --api.dashboard=true  # Esto habilita el dashboard ?
       - --api.debug=false
       - --log=true
       - --log.level=INFO # Pasar a info en produccion
