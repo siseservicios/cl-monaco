@@ -71,8 +71,7 @@ services:
   odoo:
     image: ${ODOO_IMAGE}
     container_name: odoo
-    # networks:
-    #   - web
+    restart: unless-stopped
     links:
       - postgres:db
     depends_on:
@@ -143,8 +142,7 @@ services:
   odoo_staging:
     image: ${ODOO_IMAGE}
     container_name: odoo_staging
-    # networks:
-    #   - web
+    restart: unless-stopped
     links:
       - postgres:db
     depends_on:
